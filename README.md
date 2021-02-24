@@ -1,10 +1,4 @@
----
-theme: default
-_class: lead
-paginate: true
-backgroundColor: #fff
-marp: true
----
+
 
 # Assignment 1
 ## Vagrant and Docker task
