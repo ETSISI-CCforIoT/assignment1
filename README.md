@@ -1,5 +1,4 @@
 
-
 # Assignment 1
 ## Vagrant and Docker task
 
@@ -72,8 +71,8 @@ end
 apt-get update
 apt-get install -y apache2
 if ! [ -L /var/www ]; then
-rm -rf /var/www
-ln -fs /vagrant /var/www
+    rm -rf /var/www
+    ln -fs /vagrant /var/www
 fi
 ``` 
 
@@ -95,8 +94,23 @@ vagrant ssh
 ```sh
 vagrant@precise64:~$ wget -qO- 127.0.0.1
 ````
+---
 
+- Modifiy the `Vagrantfile`
 
+```sh
+Vagrant.configure("2") do |config|
+  config.vm.box = "hashicorp/precise64"
+  config.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.network :forwarded_port, guest: 80, host: 4567
+end
+``` 
+---
+
+- Run a `vagrant reload` or `vagrant up`  so that these changes can take effect. 
+- Once the machine is running again, load http://127.0.0.1:4567 in the browser of your host machine. 
+
+> You should see a web page that is being served from the virtual machine that was automatically setup by Vagrant
 ---
 
 # Docker assignment
